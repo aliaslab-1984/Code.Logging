@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="main">
+    <div id="sources-view">
+        <h1>Sources</h1>
+        <div id="sources"></div>
+    </div>
+    <div id="events-view">
+        <div id="view">
+            <a href="#/">back</a><br />
+            <p id="currentLogSourceId"></p>
+            <button id="clearSourceCmd" class="btn btn-primary">Clear source</button>
+            <div id="controls">
+                <form>
+                    <label for="dateMin">DateMin</label>
+                    <input type="datetime" placeholder="datemin" name="dateMin" onchange="clearEvents()" />
+                    <label for="dateMax">DateMax</label>
+                    <input type="datetime" placeholder="datemax" name="dateMax" onchange="clearEvents()" />
+                    <label for="globaRegEx">Global regex</label>
+                    <input type="text" placeholder="global regex" name="globalRegex" onchange="clearEvents()" />
+                    <label for="messageRegEx">Message regex</label>
+                    <input type="text" placeholder="message regex" name="messageRegEx" onchange="clearEvents()" />
+                </form>
+            </div>
+        </div>
+        <div id="object-expand" style="display:none;">
+        </div>
+        <div id="events">
+            <table>
+                <thead>
+                    <tr></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var globalObj = {
+        currentLogSourceId: null,
+        eventBuffer:[],
+        holdSources: false,
+        holdEvents: false
+    };
+    
+    function clearEvents() {
+        $("#events").empty();
+        $("#events").append("<table><thead><tr></tr></thead><tbody></tbody></table>");
+    }
+
+    function updateSources(restart)
+    {
+        if (globalObj.holdSources && !restart)
+        {
+            setTimeout(updateSources, 2000);
+            return;
+        }
+        else {
+            globalObj.holdSources = false;
+        }
+
+        $.ajax({ method: "get", url: "api/LogAppender/Sources", cache: false })
+        .done(function (data) {
+            var sources=d3.select("div#sources")
+            .selectAll("a")
+            .data(data);
+
+            sources
+            .enter().append("a").merge(sources)
+                .style("display", "block")
+                .attr("class","sources")
+                .attr("href", function (p) { return "#/events/" + p; })
+                .text(function (p) { return p; });
+
+            sources
+            .exit().remove();
+        })
+        .always(function () { setTimeout(updateSources, 2000); });
+    }
+
+    function updateEvents(restart)
+    {
+        if (globalObj.holdEvents && !restart) {
+            setTimeout(updateEvents, 2000);
+            return;
+        }
+        else {
+            globalObj.holdEvents = false;
+        }
+
+        $.ajax({
+            method: "get", url: "api/LogAppender/Events",
+            data: {
+                LogSourceIdentity: globalObj.currentLogSourceId,
+                fromDate: globalObj.eventBuffer.length != 0 ? JSON.stringify(globalObj.eventBuffer[globalObj.eventBuffer.length - 1].getRaw("TimeStamp")) : null
+            },
+            cache: false
+        })
+        .done(function (data) {
+            data = displayLib.convertAll(data);
+            data = $.merge(globalObj.eventBuffer, data);
+
+            var table = d3.select("div#events>table");
+            var thead = d3.select('div#events>table>thead')
+            var tbody = d3.select('div#events>table>tbody');
+
+            var head = thead.select('tr')
+		        .selectAll('th')
+		        .data(displayLib.getColums(data));
+            head.enter()
+		        .append('th')
+		    .text(function (column) { return column; });
+
+            var rows = tbody.selectAll('tr')
+		        .data(data);
+            rows.enter()
+                .filter(function (el, i) {
+                    var globalRegex = new RegExp($("#controls>form>input[name='globalRegex']").val());
+                    var messageRegex = new RegExp($("#controls>form>input[name='messageRegEx']").val());
+                    var dateMin = Date.parse($("#controls>form>input[name='dateMin']").val()) || Date.parse("1970-01-01");
+                    var dateMax = Date.parse($("#controls>form>input[name='dateMax']").val()) || Date.parse("3000-01-01");
+                    return globalRegex.test(el.toString()) &&
+                        messageRegex.test(el.get("Message").value) &&
+                        (Date.parse(el.get("TimeStamp").value) >= dateMin && Date.parse(el.get("TimeStamp").value) <= dateMax);
+                })
+		        .append('tr')
+                    .attr("title", function (p) { return p.toString(); })
+                    .attr("class", function (p, i) { return i%2==0?"event-even":"event-odd" })
+                .selectAll("td")
+                .data(function (row) {
+                    return displayLib.getColums(data).map(function (column) {
+                        return { column: column, value: row.get(column) };
+                    });
+                })
+                .enter()
+                .append(function (row) {
+                    if (row.value.expand) {
+                        var tmp = document.createElement("td");
+
+                        $(tmp).append("<button class='btn " +
+                            (row.value.obj ? "btn-primary" : "btn-disabled") +
+                            "'" +
+                            (row.value.obj ? "title='" + JSON.stringify(row.value.obj) + "'" : "") +
+                            ">" + row.value.value + "</button>");
+                        
+                        if (row.value.obj) {
+                            $(tmp).find("button").click(function () {
+                                var exp = $("#object-expand");
+                                //exp.offset({ left: exp.offset().left, top: $(tmp).offset().top });
+                                exp.empty();
+                                var close = $("<button class='btn btn-primary'>Close</button>");
+                                var tab = $("<table><caption>"+row.column+"<caption></table>")
+                                Object.keys(row.value.obj).forEach(function (d) {
+                                    tab.append($("<tr><td class='fieldName'><strong>" + d + "</strong></td><td>" + row.value.obj[d] + "</td></tr>"));
+                                });
+                                exp.append(close);
+                                exp.append(tab);
+
+                                $(tmp).parent().parent().find("tr").removeClass("focused");
+
+                                $(tmp).parent().addClass("focused");
+                                exp.show();
+
+                                close.click(function () {
+                                    $(tmp).parent().parent().find("tr").removeClass("focused");
+                                    exp.hide()
+                                });
+                            });
+                        }
+
+                        return tmp;
+                    }
+                    else {
+                        var tmp = document.createElement("td");
+
+                        $(tmp).text(row.value.value);
+
+                        return tmp;
+                    }
+                })
+
+		    rows.exit().remove();
+        })
+        .always(function () { setTimeout(updateEvents, 2000); });
+    }
+
+    $(function () {
+
+
+        $.sammy(function () {
+            this.get("/", function () {
+                globalObj.holdEvents = true;
+
+                $("#sources-view").show();
+                $("#events-view").hide();
+
+                globalObj.currentLogSourceId = null;
+                globalObj.eventBuffer = [];
+
+                updateSources(true);
+            });
+            this.get("#/events/:logSourceId", function (ctx) {
+                globalObj.holdSources = true;
+
+                globalObj.currentLogSourceId = this.params["logSourceId"];
+                globalObj.eventBuffer = [];
+
+                $("#currentLogSourceId").html("Source: <strong>"+globalObj.currentLogSourceId+"</strong>");
+                $("#clearSourceCmd").off("click");
+                $("#clearSourceCmd").click(function () {
+                    $.post("api/LogAppender/ClearSource?LogSourceIdentity=" + globalObj.currentLogSourceId)
+                    globalObj.eventBuffer = [];
+                });
+
+                $("#sources-view").hide();
+                $("#events-view").show();
+
+                updateEvents(true);
+            });
+        })
+        .run();
+
+        if (!location.hash)
+            location.hash = "#/";
+    });
+</script>

@@ -1,0 +1,8 @@
+*.dll
+*.obj
+*.svn*
+*packages*
+*.log
+*.pdb
+*bin/Debug*
+*bin/Release*

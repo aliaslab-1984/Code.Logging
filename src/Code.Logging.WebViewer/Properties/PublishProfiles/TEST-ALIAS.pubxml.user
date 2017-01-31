@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Progetti\IDSign.Logging\src\IDSign.Logging.WebViewer\..\..\build\current\TEST-ALIAS\LogWebViewer</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/IDSign.Logging.WebViewer.dll">
+      <publishTime>01/17/2017 07:49:09</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>01/02/2017 06:32:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/23/2012 15:23:58</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/13/2016 23:06:14</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>01/28/2015 03:02:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>01/28/2015 03:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>01/28/2015 03:02:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>01/28/2015 03:03:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/28/2015 03:02:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>01/28/2015 03:02:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Deployment.dll">
+      <publishTime>01/28/2015 03:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.dll">
+      <publishTime>01/28/2015 03:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Razor.dll">
+      <publishTime>01/28/2015 03:04:30</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>01/16/2017 10:08:29</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>01/12/2017 17:29:10</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>01/13/2017 15:21:22</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Scripts/d3/API.md">
+      <publishTime>01/13/2017 10:04:23</publishTime>
+    </File>
+    <File Include="Scripts/d3/CHANGES.md">
+      <publishTime>01/13/2017 10:04:23</publishTime>
+    </File>
+    <File Include="Scripts/d3/d3.js">
+      <publishTime>01/13/2017 10:04:23</publishTime>
+    </File>
+    <File Include="Scripts/d3/d3.min.js">
+      <publishTime>01/13/2017 10:04:23</publishTime>
+    </File>
+    <File Include="Scripts/d3/LICENSE">
+      <publishTime>01/13/2017 10:04:23</publishTime>
+    </File>
+    <File Include="Scripts/d3/README.md">
+      <publishTime>01/13/2017 10:04:23</publishTime>
+    </File>
+    <File Include="Scripts/displayLib.js">
+      <publishTime>01/16/2017 09:07:29</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>01/13/2017 10:01:31</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>01/13/2017 10:01:33</publishTime>
+    </File>
+    <File Include="Scripts/sammy-0.7.5.js">
+      <publishTime>01/13/2017 10:50:27</publishTime>
+    </File>
+    <File Include="Scripts/sammy-0.7.5.min.js">
+      <publishTime>01/13/2017 10:50:27</publishTime>
+    </File>
+    <File Include="Views/Explorer/Index.cshtml">
+      <publishTime>01/16/2017 11:58:51</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>01/16/2017 08:57:31</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>01/12/2017 17:29:07</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>01/13/2017 10:01:29</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/17/2017 07:49:10</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

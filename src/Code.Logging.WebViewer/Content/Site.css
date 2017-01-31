@@ -1,0 +1,99 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.btn{
+    font-size: 12px !important;
+}
+
+#events-view {
+    padding-top:20px;
+}
+
+#sources {
+    margin-top:30px;
+}
+
+#sources a.sources {
+    margin:5px;
+    font-size:15px;
+}
+
+#controls {
+    margin-top:50px;
+}
+
+#events table{
+    margin: 20px 0px 20px 0px;
+    padding: 5px;
+    font-family: Verdana;
+    font-weight:normal;
+    font-size: 12px;
+}
+
+#events table tbody tr{
+    cursor:pointer;
+}
+#events table tbody tr.focused{
+    cursor:pointer;
+    background-color:#ff6a00;
+}
+
+#events table tbody tr td{
+    border-right: 1px solid #707070;
+    padding: 2px 5px 2px 5px;
+}
+#events table thead tr th{
+    border-right: 1px solid #707070;
+    border-bottom: 1px solid #707070;
+    padding: 2px 5px 2px 5px;
+    font-weight:bold;
+}
+
+#events .event-even {
+    background-color:#f1f3f3;
+}
+#events .event-odd {
+    background-color:#fefefe;
+}
+
+#events .event-even:hover {
+    background-color:#f5ff00;
+}
+#events .event-odd:hover {
+    background-color:#f5ff00;
+}
+
+#object-expand {
+    background-color:rgba(251, 255, 165, 0.46);
+    padding:15px;
+}
+
+#object-expand table {
+    width: 100%;
+}
+
+#object-expand table caption{
+    font-weight:bold;
+    text-align:left;
+    border-bottom:1px dashed black;
+    width: 100%;
+}
+
+#object-expand table tr td.fieldName{
+    border-right: 1px solid black;
+}
